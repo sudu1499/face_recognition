@@ -4,7 +4,7 @@ import glob
 import os
 
 
-def save_faces():
+def save_detected__faces():
     path='/home/sudarshan/Desktop/face_Recog/images/'
     path2='/home/sudarshan/Desktop/face_Recog/images/detected'
     os.makedirs(path2,exist_ok=True)
@@ -15,4 +15,5 @@ def save_faces():
             c+=1
             os.mkdir(path2+name)
             cv2.imwrite(path2+name+'/'+str(c)+'.jpeg',get_face(cv2.imread(j,1)))
+    return path2
 
