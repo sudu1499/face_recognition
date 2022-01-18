@@ -2,6 +2,7 @@ from pickletools import optimize
 import weakref
 import tensorflow as tf
 from tensorflow.keras.applications import xception
+
 def get_model(config):
     op=config['no_student']
     xmodel=xception(include_top=False,weights='imagenet',input_shape=(160,160,3))
