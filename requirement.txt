@@ -1,0 +1,10 @@
+numpy
+tensorflow
+cmake
+opencv-python
+dlib
+glob
+flask
+sklearn
+
+
