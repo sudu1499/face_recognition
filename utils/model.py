@@ -1,15 +1,13 @@
 import tensorflow as tf
 import glob
 import cv2
-from sklearn.model_selection import train_test_split
+from get_splited_data import get_splited_data
+from tensorflow.keras.applications import Facenet
+def create_model(config):
+    path=config['image_path']  #--->this path should be image path
+    x_train,x_val,x_test,y_train,y_val,y_test=get_splited_data(path)
 
-path='/home/sudarshan/Desktop/face_Recog/images/'
-y=[]
-temp=[]
-x=[]
-for i in glob.glob(path+'*'):
-    y.append(i.split('/')[-1])
-for i in glob.glob(path+"*/**"):
-    temp=cv2.imread(i,1)
-    x.append(temp)
+    
+
+
 

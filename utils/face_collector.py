@@ -3,7 +3,7 @@ import dlib
 import glob
 import os
 
-path='/home/sudarshan/Desktop/face_recog/images/'
+path='/home/sudarshan/Desktop/face_Recog/images/'
 vid=cv2.VideoCapture(0)
 name=input("your name")
 os.makedirs(path+name,exist_ok=True)
