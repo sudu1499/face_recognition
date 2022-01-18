@@ -2,7 +2,7 @@
 import cv2
 from glob import glob
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder,LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 #to get x as image and y as encoded value
 def get_x_get_y(path,flag=1): #here flag is wether u want y
     #path should contain detected face directory without / at the end
