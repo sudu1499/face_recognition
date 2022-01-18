@@ -2,7 +2,7 @@ import cv2
 from get_face import get_face
 import glob
 import os
-
+#this function is used if single photo is given insted of live face detection
 
 def save_detected__faces(config):
     path='/home/sudarshan/Desktop/face_Recog/images/'

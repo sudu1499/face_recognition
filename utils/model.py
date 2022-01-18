@@ -1,12 +1,22 @@
+from pickletools import optimize
+import weakref
 import tensorflow as tf
-import glob
-import cv2
-from get_splited_data import get_splited_data
-from tensorflow.keras.applications import Facenet
-def create_model(config):
-    path=config['image_path']  #--->this path should be image path
-    x_train,x_val,x_test,y_train,y_val,y_test=get_splited_data(path)
+from tensorflow.keras.applications import xception
+def get_model(config):
+    op=config['no_student']
+    xmodel=xception(include_top=False,weights='imagenet',input_shape=(160,160,3))
+    
+    for i in xmodel.layers:
+        i.trainable=False
 
+    model=tf.keras.models.Sequential()
+    model.add(tf.keras.layers.Flatten())
+    model.add(tf.keras.layers.Dense(300,activation='relu'))
+    model.add(tf.keras.layers.Dense(30,activation='relu'))
+    model.add(tf.keras.layers.Dense(op,activation='softmax'))
+    model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accuracy'])
+
+    return model
     
 
 
