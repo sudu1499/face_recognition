@@ -11,7 +11,7 @@ def get_x_get_y(config,flag=1): #here flag is wether u want y
     x=[]
     y=[]
     path=config['image_path']
-    enc=OneHotEncoder(sparse=False)
+    enc=OneHotEncoder(sparse=True)
     for i in glob(path+'/*'):
         name=i.split('/')[-1]
         for j in glob(i+'/*'):
@@ -25,7 +25,7 @@ def get_x_get_y(config,flag=1): #here flag is wether u want y
         return x
     y=np.array(y)
     y=y.reshape((-1,1))
-    y=enc.fit_transform(y)
+    y=enc.fit_transform(y).toarray()
     x_,x_test,y_,y_test=train_test_split(x,y,test_size=.2,random_state=10)
     x_train,x_val,y_train,y_val=train_test_split(x_,y_,test_size=.2,random_state=10)
     return x_train,x_val,x_test,y_train,y_val,y_test

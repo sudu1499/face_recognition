@@ -16,12 +16,13 @@ config=yaml.safe_load(open('utils/config.yaml','r'))
 
 resize_to(config) #pre process the images for appropriate shape
 
-create_aug_images(config)
+create_aug_images(config) #augment the data
+
 x_train,x_val,x_test,y_train,y_val,y_test=get_x_get_y(config,1)
 
 clb=EarlyStopping(patience=5,restore_best_weights=True)
 
-model=get_model(config)
+model=get_model(config,x_train,x_val,y_train,y_val,clb)
 
 model.fit(x_train,y_train,validation_data=(x_val,y_val),epochs=15,callbacks=[clb])
 
