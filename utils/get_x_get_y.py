@@ -3,11 +3,14 @@ import cv2
 from glob import glob
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+
 #to get x as image and y as encoded value
-def get_x_get_y(path,flag=1): #here flag is wether u want y
+def get_x_get_y(config,flag=1): #here flag is wether u want y
     #path should contain detected face directory without / at the end
     x=[]
     y=[]
+    path=config['image_path']
     enc=OneHotEncoder(sparse=False)
     for i in glob(path+'/*'):
         name=i.split('/')[-1]
@@ -23,6 +26,7 @@ def get_x_get_y(path,flag=1): #here flag is wether u want y
     y=np.array(y)
     y=y.reshape((-1,1))
     y=enc.fit_transform(y)
-    return x,y
-path='/home/sudarshan/Desktop/face_Recog/images'
-v=get_x_get_y(path)
+    x_,x_test,y_,y_test=train_test_split(x,y,test_size=.2,random_state=10)
+    x_train,x_val,y_train,y_val=train_test_split(x_,y_,test_size=.2,random_state=10)
+    return x_train,x_val,x_test,y_train,y_val,y_test
+

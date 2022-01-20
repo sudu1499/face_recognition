@@ -1,6 +1,5 @@
 import cv2
 import dlib
-import glob
 import os
 
 path='/home/sudarshan/Desktop/face_Recog/images/'
@@ -9,6 +8,7 @@ name=input("your name")
 os.makedirs(path+name,exist_ok=True)
 det=dlib.get_frontal_face_detector()
 j=0
+count=0
 while 1:
     j+=1
     _,frame=vid.read()
@@ -19,9 +19,11 @@ while 1:
         croped=frame[y1:y2,x1:x2]
         cv2.imwrite(path+name+'/'+name+str(j)+'.jpeg',croped) 
         cv2.rectangle(frame,(x1,y1),(x2,y2),color=(255,0,0),thickness=3)
+        count+=1
+    if  count==100:
+        break
     cv2.imshow('',frame)
     if cv2.waitKey(1)==ord('q'):
         cv2.destroyAllWindows()
         break
-
 vid.release()

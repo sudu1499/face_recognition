@@ -12,7 +12,8 @@ def create_aug_images(config): #does augmentation for all images in the same fol
         name=i.split('/')[-1]
         for j in glob(i+'/*'):
             img=cv2.imread(j,1)
-            img=np.reshape(img,((1,)+img.shapes))
+            img=cv2.resize(img,(160,160))
+            img=np.reshape(img,((1,)+img.shape))
             c=0
             for d in datagen.flow(img,batch_size=1,save_to_dir=path+'/'+name+'/',save_format='.jpeg'):
                 c+=1
