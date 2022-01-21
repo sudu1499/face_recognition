@@ -1,11 +1,28 @@
+from lib2to3.pgen2.token import SLASH
 import cv2
 import dlib
 import os
+import yaml
+import os
+import platform
+if platform.system()=='Windows':
+    slash='\\'
+else:
+    slash='/'
+config_path=os.path.dirname(os.path.abspath(__file__))
+config_file=config_path+slash+'config.yaml'
+config=yaml.safe_load(open(config_file,'r'))
 
-path='/home/sudarshan/Desktop/face_Recog/images/'
+#path='/home/sudarshan/Desktop/face_Recog/images/'
+path=config['image_path']
+no_students=config['no_student']
 vid=cv2.VideoCapture(0)
 name=input("your name")
 os.makedirs(path+name,exist_ok=True)
+no_students+=1
+config['no_student']=no_students
+with open(config_file,'w') as f:
+    f.write(yaml.safe_dump(config))
 det=dlib.get_frontal_face_detector()
 j=0
 count=0
