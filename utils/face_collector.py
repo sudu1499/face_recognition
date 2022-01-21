@@ -9,12 +9,13 @@ if platform.system()=='Windows':
     slash='\\'
 else:
     slash='/'
+print('#################################',slash)
 config_path=os.path.dirname(os.path.abspath(__file__))
 config_file=config_path+slash+'config.yaml'
 config=yaml.safe_load(open(config_file,'r'))
 
 #path='/home/sudarshan/Desktop/face_Recog/images/'
-path=config['image_path']
+path=config['image_path']+slash
 no_students=config['no_student']
 vid=cv2.VideoCapture(0)
 name=input("your name")
